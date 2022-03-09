@@ -21,54 +21,55 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.model.sistem.dto.UsuarioDTO;
-import com.model.sistem.entities.Usuario;
+import com.model.sistem.dto.LineaDTO;
+import com.model.sistem.entities.Linea;
 import com.model.sistem.exceptions.ObjectNotFoundException;
-import com.model.sistem.service.UsuarioService;
+import com.model.sistem.service.LineaService;
 
 import io.swagger.annotations.ApiOperation;
 
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.PUT,RequestMethod.POST})
-@RequestMapping(value="/usuario")
-public class UsuarioController extends GenericMapper<Usuario, UsuarioDTO>  {
+@RequestMapping(value="/linea")
+public class LineaController  extends GenericMapper<Linea, LineaDTO> {
 
 	@Autowired
-	private UsuarioService usuarioService;
+	private LineaService lineaService;
 
 	
-	@ApiOperation(value = "Dar de alta a los usuarios", notes = "Guardar campos necesarios del usuario")
+	@ApiOperation(value = "Dar de alta a los lineas", notes = "Guardar campos necesarios del linea")
 	@PostMapping("/")
-	public ResponseEntity<UsuarioDTO> save(@Valid @RequestBody UsuarioDTO usuarioDTO, BindingResult result) {
+	public ResponseEntity<LineaDTO> save(@Valid @RequestBody LineaDTO lineaDTO, BindingResult result) {
 		 if (result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
         }
-        return new ResponseEntity<>(toDTO(usuarioService.save(toEntity(usuarioDTO))), HttpStatus.CREATED);
+        return new ResponseEntity<>(toDTO(lineaService.save(toEntity(lineaDTO))), HttpStatus.CREATED);
 	}
 	
-	@ApiOperation(value = "Get all Usuarios")
+	@ApiOperation(value = "Get all Lineas")
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<UsuarioDTO>> findAll() {
-	        List<Usuario> list = usuarioService.findAll();
+	public ResponseEntity<List<LineaDTO>> findAll() {
+	        List<Linea> list = lineaService.findAll();
 	        if(CollectionUtils.isEmpty(list))
 	        	return ResponseEntity.noContent().build();
 	        return ResponseEntity.ok(toDTOList(list));
 	}
 
 	
-	@ApiOperation(value = "Get Usuario by id")
+	@ApiOperation(value = "Get Linea by id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UsuarioDTO> findById(@PathVariable("id") Integer id) throws ObjectNotFoundException{
-		return ResponseEntity.ok(toDTO(usuarioService.findById(id)));
+    public ResponseEntity<LineaDTO> findById(@PathVariable("id") Integer id) throws ObjectNotFoundException{
+		return ResponseEntity.ok(toDTO(lineaService.findById(id)));
     }
 
 
-    @ApiOperation(value = "Delete a Usuario by id")
+    @ApiOperation(value = "Delete a Linea by id")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity delete(@PathVariable("id") Integer id) throws ObjectNotFoundException{
-        usuarioService.delete(id);
+        lineaService.delete(id);
 		return ResponseEntity.ok().build();
 
     }
 
+	
 }

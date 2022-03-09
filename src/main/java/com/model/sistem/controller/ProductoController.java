@@ -21,54 +21,55 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.model.sistem.dto.UsuarioDTO;
-import com.model.sistem.entities.Usuario;
+import com.model.sistem.dto.ProductoDTO;
+import com.model.sistem.entities.Producto;
 import com.model.sistem.exceptions.ObjectNotFoundException;
-import com.model.sistem.service.UsuarioService;
+import com.model.sistem.service.ProductoService;
 
 import io.swagger.annotations.ApiOperation;
 
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.PUT,RequestMethod.POST})
-@RequestMapping(value="/usuario")
-public class UsuarioController extends GenericMapper<Usuario, UsuarioDTO>  {
+@RequestMapping(value="/producto")
+public class ProductoController  extends GenericMapper<Producto, ProductoDTO> {
 
 	@Autowired
-	private UsuarioService usuarioService;
+	private ProductoService productoService;
 
 	
-	@ApiOperation(value = "Dar de alta a los usuarios", notes = "Guardar campos necesarios del usuario")
+	@ApiOperation(value = "Dar de alta a los productos", notes = "Guardar campos necesarios del producto")
 	@PostMapping("/")
-	public ResponseEntity<UsuarioDTO> save(@Valid @RequestBody UsuarioDTO usuarioDTO, BindingResult result) {
+	public ResponseEntity<ProductoDTO> save(@Valid @RequestBody ProductoDTO productoDTO, BindingResult result) {
 		 if (result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
         }
-        return new ResponseEntity<>(toDTO(usuarioService.save(toEntity(usuarioDTO))), HttpStatus.CREATED);
+        return new ResponseEntity<>(toDTO(productoService.save(toEntity(productoDTO))), HttpStatus.CREATED);
 	}
 	
-	@ApiOperation(value = "Get all Usuarios")
+	@ApiOperation(value = "Get all producto")
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<UsuarioDTO>> findAll() {
-	        List<Usuario> list = usuarioService.findAll();
+	public ResponseEntity<List<ProductoDTO>> findAll() {
+	        List<Producto> list = productoService.findAll();
 	        if(CollectionUtils.isEmpty(list))
 	        	return ResponseEntity.noContent().build();
 	        return ResponseEntity.ok(toDTOList(list));
 	}
 
 	
-	@ApiOperation(value = "Get Usuario by id")
+	@ApiOperation(value = "Get producto by id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UsuarioDTO> findById(@PathVariable("id") Integer id) throws ObjectNotFoundException{
-		return ResponseEntity.ok(toDTO(usuarioService.findById(id)));
+    public ResponseEntity<ProductoDTO> findById(@PathVariable("id") String id) throws ObjectNotFoundException{
+		return ResponseEntity.ok(toDTO(productoService.findById(id)));
     }
 
 
-    @ApiOperation(value = "Delete a Usuario by id")
+    @ApiOperation(value = "Delete a producto by id")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity delete(@PathVariable("id") Integer id) throws ObjectNotFoundException{
-        usuarioService.delete(id);
+    public ResponseEntity delete(@PathVariable("id") String id) throws ObjectNotFoundException{
+        productoService.delete(id);
 		return ResponseEntity.ok().build();
 
     }
 
+	
 }

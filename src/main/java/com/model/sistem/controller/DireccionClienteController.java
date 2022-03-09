@@ -21,54 +21,55 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.model.sistem.dto.UsuarioDTO;
-import com.model.sistem.entities.Usuario;
+import com.model.sistem.dto.DireccionClienteDTO;
+import com.model.sistem.entities.DireccionCliente;
 import com.model.sistem.exceptions.ObjectNotFoundException;
-import com.model.sistem.service.UsuarioService;
+import com.model.sistem.service.DireccionClienteService;
 
 import io.swagger.annotations.ApiOperation;
 
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.PUT,RequestMethod.POST})
-@RequestMapping(value="/usuario")
-public class UsuarioController extends GenericMapper<Usuario, UsuarioDTO>  {
+@RequestMapping(value="/direccionCliente")
+public class DireccionClienteController  extends GenericMapper<DireccionCliente, DireccionClienteDTO> {
 
 	@Autowired
-	private UsuarioService usuarioService;
+	private DireccionClienteService direccionDireccionClienteService;
 
 	
-	@ApiOperation(value = "Dar de alta a los usuarios", notes = "Guardar campos necesarios del usuario")
+	@ApiOperation(value = "Dar de alta a los direccionDireccionClientes", notes = "Guardar campos necesarios del direccionDireccionCliente")
 	@PostMapping("/")
-	public ResponseEntity<UsuarioDTO> save(@Valid @RequestBody UsuarioDTO usuarioDTO, BindingResult result) {
+	public ResponseEntity<DireccionClienteDTO> save(@Valid @RequestBody DireccionClienteDTO direccionDireccionClienteDTO, BindingResult result) {
 		 if (result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
         }
-        return new ResponseEntity<>(toDTO(usuarioService.save(toEntity(usuarioDTO))), HttpStatus.CREATED);
+        return new ResponseEntity<>(toDTO(direccionDireccionClienteService.save(toEntity(direccionDireccionClienteDTO))), HttpStatus.CREATED);
 	}
 	
-	@ApiOperation(value = "Get all Usuarios")
+	@ApiOperation(value = "Get all clients")
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<UsuarioDTO>> findAll() {
-	        List<Usuario> list = usuarioService.findAll();
+	public ResponseEntity<List<DireccionClienteDTO>> findAll() {
+	        List<DireccionCliente> list = direccionDireccionClienteService.findAll();
 	        if(CollectionUtils.isEmpty(list))
 	        	return ResponseEntity.noContent().build();
 	        return ResponseEntity.ok(toDTOList(list));
 	}
 
 	
-	@ApiOperation(value = "Get Usuario by id")
+	@ApiOperation(value = "Get client by id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UsuarioDTO> findById(@PathVariable("id") Integer id) throws ObjectNotFoundException{
-		return ResponseEntity.ok(toDTO(usuarioService.findById(id)));
+    public ResponseEntity<DireccionClienteDTO> findById(@PathVariable("id") Integer id) throws ObjectNotFoundException{
+		return ResponseEntity.ok(toDTO(direccionDireccionClienteService.findById(id)));
     }
 
 
-    @ApiOperation(value = "Delete a Usuario by id")
+    @ApiOperation(value = "Delete a Nego movement by id")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity delete(@PathVariable("id") Integer id) throws ObjectNotFoundException{
-        usuarioService.delete(id);
+        direccionDireccionClienteService.delete(id);
 		return ResponseEntity.ok().build();
 
     }
 
+	
 }
