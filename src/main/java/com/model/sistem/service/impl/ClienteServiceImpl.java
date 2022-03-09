@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.model.sistem.entities.Cliente;
+import com.model.sistem.enums.EstadoEnum;
 import com.model.sistem.exceptions.ObjectNotFoundException;
 import com.model.sistem.repository.ClienteRepository;
 import com.model.sistem.service.ClienteService;
@@ -24,7 +25,7 @@ public class ClienteServiceImpl implements ClienteService{
 	
 	@Override
 	public List<Cliente> findAll() {
-		return clienteRepository.findAll();
+		return clienteRepository.findByEstadoOrderByRazonSocial(EstadoEnum.ACTIVO.getEstado());
 	}
 	
 	@Override
