@@ -22,68 +22,63 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.model.sistem.dto.LineaDTO;
-import com.model.sistem.dto.LineaDTO;
-import com.model.sistem.entities.Empresa;
-import com.model.sistem.entities.Especialidad;
+import com.model.sistem.dto.CategoriaDTO;
+import com.model.sistem.entities.Categoria;
 import com.model.sistem.entities.Linea;
-import com.model.sistem.entities.Linea;
-import com.model.sistem.enums.EstadoEnum;
 import com.model.sistem.exceptions.ObjectNotFoundException;
-import com.model.sistem.service.LineaService;
+import com.model.sistem.service.CategoriaService;
 
 import io.swagger.annotations.ApiOperation;
 
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.PUT,RequestMethod.POST})
-@RequestMapping(value="/linea")
-public class LineaController  extends GenericMapper<Linea, LineaDTO> {
+@RequestMapping(value="/categoria")
+public class CategoriaController  extends GenericMapper<Categoria, CategoriaDTO> {
 
 	@Autowired
-	private LineaService lineaService;
+	private CategoriaService categoriaService;
 
 	
-	@ApiOperation(value = "Dar de alta a los lineas", notes = "Guardar campos necesarios del linea")
+	@ApiOperation(value = "Dar de alta a los categorias", notes = "Guardar campos necesarios del categoria")
 	@PostMapping("/")
-	public ResponseEntity<LineaDTO> save(@Valid @RequestBody LineaDTO lineaDTO, BindingResult result) {
+	public ResponseEntity<CategoriaDTO> save(@Valid @RequestBody CategoriaDTO categoriaDTO, BindingResult result) {
 		 if (result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
         }
-        return new ResponseEntity<>(toDTO(lineaService.save(toEntity(lineaDTO))), HttpStatus.CREATED);
+        return new ResponseEntity<>(toDTO(categoriaService.save(toEntity(categoriaDTO))), HttpStatus.CREATED);
 	}
 	
-	@ApiOperation(value = "Get all Lineas")
+	@ApiOperation(value = "Get all Categorias")
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<LineaDTO>> findAll() {
-	        List<Linea> list = lineaService.findAll();
+	public ResponseEntity<List<CategoriaDTO>> findAll() {
+	        List<Categoria> list = categoriaService.findAll();
 	        if(CollectionUtils.isEmpty(list))
 	        	return ResponseEntity.noContent().build();
 	        return ResponseEntity.ok(toDTOList(list));
 	}
 	
-	@ApiOperation(value = "Get all lineas for especialidad")
-	@GetMapping(value = "/especialidad", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<LineaDTO>> findForCotizacion(@RequestParam("idEmpresa") Integer idEmpresa, @RequestParam("idEspecialidad") Integer idEspecialidad) {
-	        List<Linea> list = lineaService.findByEstadoAndEspecialidadAndEmpresa(EstadoEnum.ACTIVO.getEstado(), new Especialidad(idEspecialidad), new Empresa(idEmpresa));
+	@ApiOperation(value = "Get all categorias for especialidad")
+	@GetMapping(value = "/linea", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<CategoriaDTO>> findForLinea(@RequestParam("idLinea") Integer idLinea) {
+	        List<Categoria> list = categoriaService.findByEstadoAndLinea(new Linea(idLinea));
 	        if(CollectionUtils.isEmpty(list))
 	        	return ResponseEntity.noContent().build();
 	        return ResponseEntity.ok(toDTOList(list));
 	}
 
 	
-	@ApiOperation(value = "Get Linea by id")
+	@ApiOperation(value = "Get Categoria by id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<LineaDTO> findById(@PathVariable("id") Integer id) throws ObjectNotFoundException{
-		return ResponseEntity.ok(toDTO(lineaService.findById(id)));
+    public ResponseEntity<CategoriaDTO> findById(@PathVariable("id") Integer id) throws ObjectNotFoundException{
+		return ResponseEntity.ok(toDTO(categoriaService.findById(id)));
     }
 
 
-    @ApiOperation(value = "Delete a Linea by id")
+    @ApiOperation(value = "Delete a Categoria by id")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity delete(@PathVariable("id") Integer id) throws ObjectNotFoundException{
-        lineaService.delete(id);
+        categoriaService.delete(id);
 		return ResponseEntity.ok().build();
-
     }
 
 	

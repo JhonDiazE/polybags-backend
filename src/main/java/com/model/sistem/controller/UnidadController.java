@@ -30,7 +30,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.PUT,RequestMethod.POST})
-@RequestMapping(value="/Unidade")
+@RequestMapping(value="/unidad")
 public class UnidadController  extends GenericMapper<Unidad, UnidadDTO> {
 
 	@Autowired
@@ -46,7 +46,7 @@ public class UnidadController  extends GenericMapper<Unidad, UnidadDTO> {
         return new ResponseEntity<>(toDTO(UnidadeService.save(toEntity(UnidadeDTO))), HttpStatus.CREATED);
 	}
 	
-	@ApiOperation(value = "Get all Unidads")
+	@ApiOperation(value = "Get all Unidades")
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<UnidadDTO>> findAll() {
 	        List<Unidad> list = UnidadeService.findAll();

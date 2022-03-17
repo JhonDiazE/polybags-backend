@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.model.sistem.entities.Empresa;
+import com.model.sistem.entities.Especialidad;
 import com.model.sistem.entities.Linea;
 import com.model.sistem.exceptions.ObjectNotFoundException;
 import com.model.sistem.repository.LineaRepository;
@@ -21,6 +23,12 @@ public class LineaServiceImpl implements LineaService{
 	public Linea findById(Integer id) throws ObjectNotFoundException {
 		return  lineaRepository.findById(id).orElseThrow(()->new ObjectNotFoundException("No se encontro registro con ese id "+id));
 	}
+	
+	@Override
+	public List<Linea> findByEstadoAndEspecialidadAndEmpresa(String estado, Especialidad especialidad, Empresa empresa){
+		return lineaRepository.findByEstadoAndEspecialidadAndEmpresa(estado, especialidad, empresa);
+	}
+
 	
 	@Override
 	public List<Linea> findAll() {

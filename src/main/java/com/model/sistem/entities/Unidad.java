@@ -19,4 +19,5 @@ public class Unidad {
 	
 	private String descripcion;
 	private String abreviatura;
+	private String estado;
 }

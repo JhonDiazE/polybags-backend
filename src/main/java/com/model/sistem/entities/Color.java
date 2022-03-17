@@ -5,26 +5,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-public class Sucursal {
+@AllArgsConstructor
+@NoArgsConstructor
+public class Color {
 	
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id_sucursal")
+	@Column(name="id_color")
 	@Id
 	private Integer id;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_empresa")
-	private Empresa empresa;
-	
-	@Column(name="razon_social")
-	private String razonSocial;
-	
-	private String nombre;
+	private String descripcion;
+	private String abreviatura;
+	private String estado;
 }

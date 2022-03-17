@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.model.sistem.entities.Unidad;
+import com.model.sistem.enums.EstadoEnum;
 import com.model.sistem.exceptions.ObjectNotFoundException;
 import com.model.sistem.repository.UnidadRepository;
 import com.model.sistem.service.UnidadService;
@@ -24,7 +25,7 @@ public class UnidadServiceImpl implements UnidadService{
 	
 	@Override
 	public List<Unidad> findAll() {
-		return unidadRepository.findAll();
+		return unidadRepository.findByEstadoOrderByDescripcion(EstadoEnum.ACTIVO.getEstado());
 	}
 	
 	@Override

@@ -1,5 +1,7 @@
 package com.model.sistem.entities;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,33 +18,19 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Linea {
+public class Categoria {
 	
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id_linea")
+	@Column(name="id_categoria")
 	@Id
 	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_empresa")
-	private Empresa empresa;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_especialidad")
-	private Especialidad especialidad;
+	@JoinColumn(name = "id_linea")
+	private Linea linea;
 	
 	private String descripcion;
 	private String codigo;
 	private String estado;
-	private String estadoParametroPlastico;
-	private String estadoStockLote;
-	private String estadoStockItem;
-	private boolean productoVenta;
-	private String tipoProductoVenta;
-	
-	public Linea(Integer id) {
-		this.id = id;
-	}
-	
-	
+	private BigDecimal densidad;
 }

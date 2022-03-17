@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UnidadDTO {
-	
+public class EmpresaDTO {
+
 	private Integer id;
-	private String descripcion;
-	private String abreviatura;
-	private String estado;
+	private String razonSocial;
+	private String ruc;
+
 }

@@ -9,15 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LineaDTO {
-	
+public class ColorDTO {
+
 	private Integer id;
 	private String descripcion;
-	private String codigo;
+	private String abreviatura;
 	private String estado;
-	private String estadoParametroPlastico;
-	private String estadoStockLote;
-	private String estadoStockItem;
-	private boolean productoVenta;
-	private String tipoProductoVenta;
 }

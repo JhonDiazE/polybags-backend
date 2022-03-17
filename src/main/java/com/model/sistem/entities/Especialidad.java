@@ -16,10 +16,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Linea {
+public class Especialidad {
 	
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id_linea")
+	@Column(name="id_especialidad")
 	@Id
 	private Integer id;
 	
@@ -27,22 +27,16 @@ public class Linea {
 	@JoinColumn(name = "id_empresa")
 	private Empresa empresa;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_especialidad")
-	private Especialidad especialidad;
+	@Column(name="estado_campos_pt")
+	private String estadoCamposPt;
 	
 	private String descripcion;
 	private String codigo;
 	private String estado;
-	private String estadoParametroPlastico;
-	private String estadoStockLote;
-	private String estadoStockItem;
-	private boolean productoVenta;
-	private String tipoProductoVenta;
 	
-	public Linea(Integer id) {
+	public Especialidad(Integer id) {
 		this.id = id;
 	}
-	
+		
 	
 }
