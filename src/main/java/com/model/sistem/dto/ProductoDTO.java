@@ -2,6 +2,8 @@ package com.model.sistem.dto;
 
 import java.math.BigDecimal;
 
+import com.model.sistem.entities.ParametroEstadoGeneral;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +21,7 @@ public class ProductoDTO {
 	private LineaDTO linea;
 	private ColorDTO color;
 	private CategoriaDTO categoria;
+	private ParametroEstadoGeneralDTO parametroEstadoGeneralCotizacion;
 	private BigDecimal precio;
 	private String tipoMonedaPrecio; //` char(1) DEFAULT 'D',
 	private String estado;
@@ -50,5 +53,19 @@ public class ProductoDTO {
 	private BigDecimal anchoUtilDesarrollo;
 	private String tipoControlStock;
 	private String tipoProductoVenta;
-
+	private BigDecimal pesoZipperUnd;
+	private BigDecimal pesoValvulaUnd;
+	private BigDecimal pesoCalculadoAdicional;
+	private String formaSustratoDesarrollo;
+	private BigDecimal anchoImpresion;
+	private BigDecimal frecuenciaImpresion;
+	private BigDecimal anchoBandaImpresion;
+	private BigDecimal largoRepeticionImpresion;
+	private Integer numeroRepeticiones;
+	private String impresion;
+	private String numeroCilindro;
+	private Integer numeroColores;
+	private String tipoImpresion;
+	private String estadoZipper;
+	private String estadoValvula;
 }

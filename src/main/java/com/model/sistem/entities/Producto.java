@@ -36,6 +36,14 @@ public class Producto {
 	@JoinColumn(name = "id_color")
 	private Color color;
 	
+	@ManyToOne
+	@JoinColumn(name = "id_parametro_estado_general_tipo_producto_ctz")
+	private ParametroEstadoGeneral parametroEstadoGeneralCotizacion;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_configuracion_cotizacion")
+	private ConfiguracionCotizacion configuracionCotizacion;
+	
 	private BigDecimal precio;
 	private String tipoMonedaPrecio; //` char(1) DEFAULT 'D',
 	private String estado;
@@ -67,4 +75,20 @@ public class Producto {
 	private BigDecimal anchoUtilDesarrollo;
 	private String tipoControlStock;
 	private String tipoProductoVenta;
+	private BigDecimal pesoZipperUnd;
+	private BigDecimal pesoValvulaUnd;
+	private BigDecimal pesoCalculadoAdicional;
+	private String formaSustratoDesarrollo;
+	private BigDecimal anchoImpresion;
+	private BigDecimal frecuenciaImpresion;
+	private BigDecimal anchoBandaImpresion;
+	private BigDecimal largoRepeticionImpresion;
+	private Integer numeroRepeticiones;
+	private String impresion;
+	private String numeroCilindro;
+	private Integer numeroColores;
+	private String tipoImpresion;
+	private String estadoZipper;
+	private String estadoValvula;
+	
 }

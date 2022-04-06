@@ -13,6 +13,9 @@ public class LineaDTO {
 	
 	private Integer id;
 	private String descripcion;
+	private UnidadDTO unidadDefault;
+	private EspecialidadDTO especialidad;
+	private EmpresaDTO empresa;
 	private String codigo;
 	private String estado;
 	private String estadoParametroPlastico;

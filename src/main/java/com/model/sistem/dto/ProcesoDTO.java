@@ -1,7 +1,5 @@
 package com.model.sistem.dto;
 
-import java.math.BigDecimal;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,15 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoriaDTO {
+public class ProcesoDTO {
 
 	private Integer id;
-	private LineaDTO linea;
 	private String descripcion;
-	private String codigo;
+	private String abreviatura;
 	private String estado;
-	private BigDecimal densidad;
-    private BigDecimal gramajeDefinido;
-    private String requiereEspesor;
-    private BigDecimal precioUnitCotizacionDol;
 }

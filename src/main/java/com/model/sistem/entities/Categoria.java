@@ -33,4 +33,7 @@ public class Categoria {
 	private String codigo;
 	private String estado;
 	private BigDecimal densidad;
+    private BigDecimal gramajeDefinido;
+    private String requiereEspesor;
+    private BigDecimal precioUnitCotizacionDol;
 }

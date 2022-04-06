@@ -31,6 +31,10 @@ public class Linea {
 	@JoinColumn(name = "id_especialidad")
 	private Especialidad especialidad;
 	
+	@ManyToOne
+	@JoinColumn(name = "id_unidad_default")
+	private Unidad unidadDefault;
+	
 	private String descripcion;
 	private String codigo;
 	private String estado;
